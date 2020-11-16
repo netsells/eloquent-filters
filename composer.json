@@ -12,5 +12,18 @@
     "require": {},
     "require-dev": {
         "orchestra/testbench": "^6.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Netsells\\EloquentFilters\\EloquentFiltersServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Netsells\\EloquentFilters\\": "src",
+            "Netsells\\EloquentFilters\\Tests\\": "tests"
+        }
     }
 }
