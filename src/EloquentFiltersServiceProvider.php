@@ -3,6 +3,8 @@
 namespace Netsells\EloquentFilters;
 
 use Illuminate\Support\ServiceProvider;
+use Netsells\EloquentFilters\Interfaces\EloquentFilterInterface;
+use Netsells\EloquentFilters\Interfaces\FilterFactoryInterface;
 
 class EloquentFiltersServiceProvider extends ServiceProvider
 {
@@ -11,6 +13,9 @@ class EloquentFiltersServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/Config/eloquent-filters.php' => config_path('eloquent-filters.php'),
         ], 'eloquent-filters');
+
+        $this->app->bind(EloquentFilterInterface::class, EloquentFilter::class);
+        $this->app->bind(FilterFactoryInterface::class, FilterFactory::class);
     }
 
     public function register()
