@@ -1,0 +1,16 @@
+{
+    "name": "netsells/eloquent-filters",
+    "description": "A simple package to help you easily organise model query logic",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adam Hutchison",
+            "email": "adam.hutchison@netsells.co.uk"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "orchestra/testbench": "^6.4"
+    }
+}
