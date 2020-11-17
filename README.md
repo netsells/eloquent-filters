@@ -93,3 +93,30 @@ Route::get('/', function () {
         ])->get();
 });
 ```
+
+You may pass any `iterable` to the `applyFilters()` method. So all of the below are also valid:
+
+```php
+Route::get('/', function (Request $request) {
+    return Post::applyFilters($request->all())->get();
+});
+```
+
+```php
+Route::get('/', function (Request $request) {
+    return Post::applyFilters($request->validated())->get();
+});
+```
+
+```php
+Route::get('/', function (Request $request) {
+    return Post::applyFilters($request->only('title'))->get();
+});
+```
+
+```php
+Route::get('/', function (Request $request) {
+    $collection = collect(['title' => 'laravel']);
+    return Post::applyFilters($collection)->get();
+});
+```
