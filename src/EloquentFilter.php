@@ -21,11 +21,9 @@ final class EloquentFilter implements EloquentFilterInterface
     public function applyFilters(Builder $query, iterable $searchFields): void
     {
         foreach ($searchFields as $field => $value) {
-            if ($value || $value === false) {
-                $this->factory
-                    ->getFilter($query, $field)
-                    ->applyFilter($query, $value);
-            }
+            $this->factory
+                ->getFilter($query, $field)
+                ->applyFilter($query, $value);
         }
     }
 }
