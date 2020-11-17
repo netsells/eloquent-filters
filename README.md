@@ -82,7 +82,7 @@ return [
 ];
 ```
 
-*Note - the query parameter is indipendant of the database column being queried. They are coupled together only by the config file*
+*Note - the query parameter is independent of the database column being queried. They are coupled together only by the config file*
 
 Finally, apply the filter as follows.
 
