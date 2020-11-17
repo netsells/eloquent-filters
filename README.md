@@ -56,7 +56,7 @@ class TileFilter implements FilterInterface
 }
 ```
 
-Then register the filter against the model in the `eloquent-filters.php config file.
+Then register the filter against the model in the `eloquent-filters.php` config file.
 
 ```php
 <?php
