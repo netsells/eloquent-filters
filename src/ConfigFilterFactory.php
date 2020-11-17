@@ -7,7 +7,7 @@ use Netsells\EloquentFilters\Interfaces\FilterInterface;
 use Netsells\EloquentFilters\Interfaces\FilterFactoryInterface;
 use Netsells\EloquentFilters\Exceptions\ModelFiltersNotFoundException;
 
-final class FilterFactory implements FilterFactoryInterface
+final class ConfigFilterFactory implements FilterFactoryInterface
 {
     private array $config;
 

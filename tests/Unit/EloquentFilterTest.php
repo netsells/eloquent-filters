@@ -22,6 +22,6 @@ class EloquentFilterTest extends TestCase
     */
     public function testFaketest(): void
     {
-        $this->assertTrue(1);
+        $this->assertTrue(true);
     }
 }

@@ -18,6 +18,6 @@ class EloquentFiltersServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(EloquentFilterInterface::class, EloquentFilter::class);
-        $this->app->bind(FilterFactoryInterface::class, FilterFactory::class);
+        $this->app->bind(FilterFactoryInterface::class, ConfigFilterFactory::class);
     }
 }
