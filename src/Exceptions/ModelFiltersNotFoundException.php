@@ -2,9 +2,9 @@
 
 namespace Netsells\EloquentFilters\Exceptions;
 
-use Exception;
+use RuntimeException;
 
-class ModelFiltersNotFoundException extends Exception
+class ModelFiltersNotFoundException extends RuntimeException
 {
     //
 }

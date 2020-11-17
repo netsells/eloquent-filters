@@ -13,23 +13,22 @@ final class FilterFactory implements FilterFactoryInterface
 
     public function __construct()
     {
-        $this->config = config('eloquent-filters');
+        $this->config = config('eloquent-filters.filters');
     }
 
     /**
      * @throws ModelFiltersNotFoundException
      */
-    public function getFilter(Builder $query, $field): FilterInterface
+    public function getFilter(Builder $query, string $field): FilterInterface
     {
-        $modelName = get_class($query->getModel());
-        $modelFilters = $this->config[$modelName];
+        $modelClass = get_class($query->getModel());
 
-        if (array_key_exists($field, $modelFilters)) {
-            return app($modelFilters[$field]);
+        if (isset($this->config[$modelClass][$field])) {
+            return app($this->config[$modelClass][$field]);
         }
 
         throw new ModelFiltersNotFoundException(
-            "No filter map is present for a {$field} field on the {$modelName} model in eloquent-filters.php config"
+            "No filter map is present for a {$field} field on the {$modelClass} model in eloquent-filters.php config"
         );
     }
 }

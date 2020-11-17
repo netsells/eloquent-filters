@@ -13,17 +13,8 @@ trait HasFilters
      */
     public function scopeApplyFilters(Builder $query, iterable $searchValues): Builder
     {
-        $modelClass = self::class;
+        app(EloquentFilterInterface::class)->applyFilters($query, $searchValues);
 
-        if (array_key_exists($modelClass, config('eloquent-filters'))) {
-            app(EloquentFilterInterface::class)
-                ->applyFilters($query, $searchValues);
-
-            return $query;
-        }
-
-        throw new ModelFiltersNotFoundException(
-            "No model filters are registered for {$modelClass} in the eloquent-filters config file"
-        );
+        return $query;
     }
 }

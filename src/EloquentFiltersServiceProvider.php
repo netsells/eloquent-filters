@@ -13,13 +13,11 @@ class EloquentFiltersServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/Config/eloquent-filters.php' => config_path('eloquent-filters.php'),
         ], 'eloquent-filters');
-
-        $this->app->bind(EloquentFilterInterface::class, EloquentFilter::class);
-        $this->app->bind(FilterFactoryInterface::class, FilterFactory::class);
     }
 
     public function register()
     {
-        //
+        $this->app->bind(EloquentFilterInterface::class, EloquentFilter::class);
+        $this->app->bind(FilterFactoryInterface::class, FilterFactory::class);
     }
 }

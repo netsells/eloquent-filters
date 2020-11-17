@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Builder;
 
 interface FilterFactoryInterface
 {
-    public function getFilter(Builder $query, $field): FilterInterface;
+    public function getFilter(Builder $query, string $field): FilterInterface;
 }
