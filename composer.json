@@ -9,7 +9,9 @@
             "email": "adam.hutchison@netsells.co.uk"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^7.4"
+    },
     "require-dev": {
         "orchestra/testbench": "^6.4"
     },

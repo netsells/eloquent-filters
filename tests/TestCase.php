@@ -10,11 +10,12 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    protected function getPackageProviders($app)
+    /**
+     * @return void
+     */
+    public function setup(): void
     {
-        return [
-            EloquentFiltersServiceProvider::class,
-        ];
+        parent::setup();
 
         $this->app->config->set(
             "eloquent-filters.filters",
@@ -24,6 +25,13 @@ abstract class TestCase extends BaseTestCase
                 ]
             ]
         );
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [
+            EloquentFiltersServiceProvider::class,
+        ];
     }
 
     protected function getEnvironmentSetUp($app)
