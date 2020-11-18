@@ -11,3 +11,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     * PATCH version when you make backwards-compatible bug fixes.
 
 ## Major Versions
+* [1.0.0](#400---2020-11-18) - Initial release
