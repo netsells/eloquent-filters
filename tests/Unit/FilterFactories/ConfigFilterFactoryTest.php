@@ -34,4 +34,20 @@ class ConfigFilterFactoryTest extends TestCase
 
         $this->factory->getFilter(TestModel::query(), 'unregistered_query_param');
     }
+
+    public function testGetFilterThrowsExceptionForIncorrectFilterType(): void
+    {
+        $this->expectException(ModelFiltersNotFoundException::class);
+
+        $this->app->config->set(
+            "eloquent-filters.filters",
+            [
+                TestModel::class => [
+                    'title' => '',
+                ]
+            ]
+        );
+
+        $this->factory->getFilter(TestModel::query(), 'unregistered_query_param');
+    }
 }

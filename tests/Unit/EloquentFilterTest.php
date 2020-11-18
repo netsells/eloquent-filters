@@ -3,12 +3,9 @@
 namespace Netsells\EloquentFilters\Tests\Unit;
 
 use Netsells\EloquentFilters\Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EloquentFilterTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * @return void
      */
