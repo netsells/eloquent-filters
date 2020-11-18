@@ -47,7 +47,7 @@ namespace App\Features\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use Netsells\EloquentFilters\Interfaces\FilterInterface;
 
-class TileFilter implements FilterInterface
+class TitleFilter implements FilterInterface
 {
     public function applyFilter(Builder $query, $value): void
     {
