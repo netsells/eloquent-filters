@@ -23,12 +23,27 @@ final class ConfigFilterFactory implements FilterFactoryInterface
     {
         $modelClass = get_class($query->getModel());
 
-        if (isset($this->config[$modelClass][$field])) {
-            return app($this->config[$modelClass][$field]);
+        $this->validateConfigItem($modelClass, $field);
+
+        return app($this->config[$modelClass][$field]);
+    }
+
+    private function validateConfigItem(string $modelClass, string $field): void
+    {
+        if (!isset($this->config[$modelClass][$field])) {
+            throw new ModelFiltersNotFoundException(
+                "No filter map is present for a {$field} field on the {$modelClass} model in eloquent-filters.php config"
+            );
         }
 
-        throw new ModelFiltersNotFoundException(
-            "No filter map is present for a {$field} field on the {$modelClass} model in eloquent-filters.php config"
-        );
+        $filter = $this->config[$modelClass][$field];
+
+        $interface = FilterInterface::class;
+
+        if (!isset(class_implements($filter)[$interface])) {
+            throw new ModelFiltersNotFoundException(
+                "The filter registered for the {$field} field on the {$modelClass} model must implement {$interface}"
+            );
+        }
     }
 }
