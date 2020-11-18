@@ -3,6 +3,13 @@
     "description": "A simple package to help you easily organise model query logic",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "eloquent",
+        "models",
+        "filter",
+        "search"
+    ],
     "authors": [
         {
             "name": "Adam Hutchison",

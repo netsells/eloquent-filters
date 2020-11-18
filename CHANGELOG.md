@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Major Versions
 * [1.0.0](#400---2020-11-18) - Initial release
+* [1.0.1](#400---2020-11-18) - Allows for PHP 8.0 Compatability
