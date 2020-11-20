@@ -36,9 +36,10 @@ final class FilterFinder
 
         preg_match('#^namespace\s+(.+?);$#sm', $fileSource, $matches);
 
-        if (!isset($matches[1])) {
+        if (isset($matches[1])) {
             $namespace = $matches[1] . '\\';
-            $this->filers[] = $namespace . str_replace('.php', '', basename($path));
+            $class = $namespace . str_replace('.php', '', basename($path));
+            array_push($this->filters, $class);
         }
     }
 }
