@@ -2,7 +2,7 @@
 
 namespace Netsells\EloquentFilters\Attributes;
 
-#[Attribute]
+#[\Attribute]
 class FiltersModel
 {
     public string $model;

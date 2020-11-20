@@ -1,6 +1,6 @@
 <?php
 
-namespace Netsells\EloquentFilters;
+namespace Netsells\EloquentFilters\Factories;
 
 use Illuminate\Database\Eloquent\Builder;
 use Netsells\EloquentFilters\Interfaces\FilterInterface;
