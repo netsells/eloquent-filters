@@ -94,9 +94,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Netsells\EloquentFilters\Interfaces\FilterInterface;
 use Netsells\EloquentFilters\Attributes\FiltersModel;
 
+#[FiltersModel(Post::class, 'title')]
 class TitleFilter implements FilterInterface
 {
-    #[FiltersModel(Post::class, 'title')]
     public function applyFilter(Builder $query, $value): void
     {
         $query->where('title', 'like', "%{$value}%");
