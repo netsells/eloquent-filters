@@ -79,6 +79,7 @@ There are two ways to register a filter. Firstly via the `filters` array in the 
         Post::class => [
             'title' => TitleFilter::class,
         ],
+    ],
 ```
 
 or by applying the `Netsells\EloquentFilters\Attributes\FiltersModel` attribute to the filter class. 
