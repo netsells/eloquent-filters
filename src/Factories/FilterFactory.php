@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Builder;
 use Netsells\EloquentFilters\Interfaces\FilterInterface;
 use Netsells\EloquentFilters\Interfaces\FilterFactoryInterface;
 use Netsells\EloquentFilters\Exceptions\ModelFiltersNotFoundException;
+use Netsells\EloquentFilters\Interfaces\FilterFinderInterface;
 
-final class ConfigFilterFactory implements FilterFactoryInterface
+final class FilterFactory implements FilterFactoryInterface
 {
-    private array $config;
+    private array $filters;
 
-    public function __construct()
+    public function __construct(FilterFinderInterface $finder)
     {
-        $this->config = config('eloquent-filters.filters');
+        $this->filters = $finder->getFilterList();
     }
 
     /**
@@ -23,20 +24,20 @@ final class ConfigFilterFactory implements FilterFactoryInterface
     {
         $modelClass = get_class($query->getModel());
 
-        $this->validateConfigItem($modelClass, $field);
+        $this->validateFilter($modelClass, $field);
 
-        return app($this->config[$modelClass][$field]);
+        return app($this->filters[$modelClass][$field]);
     }
 
-    private function validateConfigItem(string $modelClass, string $field): void
+    private function validateFilter(string $modelClass, string $field): void
     {
-        if (!isset($this->config[$modelClass][$field])) {
+        if (!isset($this->filters[$modelClass][$field])) {
             throw new ModelFiltersNotFoundException(
                 "No filter map is present for a {$field} field on the {$modelClass} model in eloquent-filters.php config"
             );
         }
 
-        $filter = $this->config[$modelClass][$field];
+        $filter = $this->filters[$modelClass][$field];
 
         $interface = FilterInterface::class;
 

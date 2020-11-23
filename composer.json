@@ -17,8 +17,8 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
-        "symfony/finder": "^5.1"
+        "php": "^8.0",
+        "netsells/attribute-finder": "^2.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.4"

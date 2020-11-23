@@ -3,12 +3,12 @@
 namespace Netsells\EloquentFilters\Tests\Unit\FilterFactories;
 
 use Netsells\EloquentFilters\Tests\TestCase;
-use Netsells\EloquentFilters\ConfigFilterFactory;
-use Netsells\EloquentFilters\Exceptions\ModelFiltersNotFoundException;
-use Netsells\EloquentFilters\Tests\Database\Filters\TestFilter;
+use Netsells\EloquentFilters\Factories\FilterFactory;
 use Netsells\EloquentFilters\Tests\Database\Models\TestModel;
+use Netsells\EloquentFilters\Tests\Database\Filters\TestFilter;
+use Netsells\EloquentFilters\Exceptions\ModelFiltersNotFoundException;
 
-class ConfigFilterFactoryTest extends TestCase
+class FilterFactoryTest extends TestCase
 {
     private $factory;
 
@@ -18,7 +18,7 @@ class ConfigFilterFactoryTest extends TestCase
     public function setup(): void
     {
         parent::setup();
-        $this->factory = app(ConfigFilterFactory::class);
+        $this->factory = app(FilterFactory::class);
     }
 
     public function testGetFilterReturnsCorrectFilterObject(): void

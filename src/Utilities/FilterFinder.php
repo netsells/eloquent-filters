@@ -2,57 +2,35 @@
 
 namespace Netsells\EloquentFilters\Utilities;
 
+use Netsells\AttributeFinder\AttributeFinder;
 use ReflectionClass;
-use Symfony\Component\Finder\Finder;
 use Netsells\EloquentFilters\Attributes\FiltersModel;
+use Netsells\EloquentFilters\Interfaces\FilterFinderInterface;
 
-final class FilterFinder
+final class FilterFinder implements FilterFinderInterface
 {
-    private string $filterDirectory;
-    private array $filters = [];
-    private array $mappedFilters = [];
+    private array $mappedFilters;
+    private AttributeFinder $finder;
 
-    public function __construct(string $directory = null)
+    public function __construct()
     {
-        $this->filterDirectory = $directory ?? base_path('app');
+        $this->finder = new AttributeFinder(config('eloquent-filters.directory', base_path('app')));
+        $this->mappedFilters = config('eloquent-filters.filters', []);
     }
 
     public function getFilterList(): array
     {
-        $finder = new Finder();
-
-        $files = $finder->in($this->filterDirectory)
-            ->files()
-            ->name('*.php')
-            ->contains('/\#\[FiltersModel\(.*?\)\]/');
-
-        foreach ($files as $file) {
-            $this->addFilterClassFromPath($file);
-        }
-
         $this->mapFilters();
 
         return $this->mappedFilters;
     }
 
-    private function addFilterClassFromPath(string $path): void
-    {
-        $fileSource = file_get_contents($path);
-
-        preg_match('#^namespace\s+(.+?);$#sm', $fileSource, $matches);
-
-        if (isset($matches[1])) {
-            $namespace = $matches[1] . '\\';
-            $class = $namespace . str_replace('.php', '', basename($path));
-            array_push($this->filters, $class);
-        }
-    }
-
     private function mapFilters(): void
     {
-        foreach ($this->filters as $filter) {
-            $reflector = new ReflectionClass($filter);
-            $attribute  = $reflector->getAttributes(FiltersModel::class)[0]->newInstance();
+        $filters = $this->finder->getClassesWithAttribute(FiltersModel::class);
+
+        foreach ($filters as $filter) {
+            $attribute  = $filter->getAttributes(FiltersModel::class)[0]->newInstance();
 
             if (!array_key_exists($attribute->model, $this->mappedFilters)) {
                 $this->mappedFilters[$attribute->model] = [];
