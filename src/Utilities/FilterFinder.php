@@ -36,7 +36,7 @@ final class FilterFinder implements FilterFinderInterface
                 $this->mappedFilters[$attribute->model] = [];
             }
 
-            $this->mappedFilters[$attribute->model][$attribute->queryParameter] = $filter;
+            $this->mappedFilters[$attribute->model][$attribute->queryParameter] = $filter->getName();
         }
     }
 }
