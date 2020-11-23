@@ -22,6 +22,7 @@ php artisan vendor:publish --tag=eloquent-filters
 
 ## Usage
 
+### Basic Usage
 Once you have published the config add the `Netsells\EloquentFilters\Traits\HasFilters` trait to any models that you wish to add filters to.
 
 ```php
@@ -56,35 +57,55 @@ class TitleFilter implements FilterInterface
 }
 ```
 
-Then register the filter against the model in the `eloquent-filters.php` config file.
+### Registering Filters
+
+There are two ways to register a filter. Firstly via the `filters` array in the `eloquent-filters.php` config file as below:
+
+```php
+    /*
+    |--------------------------------------------------------------------------
+    | Model Filter Registration
+    |--------------------------------------------------------------------------
+    | This config file is used to register eloquent filters against
+    | a query parameter.
+    |
+    | Model::class => [
+    |      'query_parameter' => Filter::class,
+    | ],
+    |
+    */
+
+    'filters' => [
+        Post::class => [
+            'title' => TitleFilter::class,
+        ],
+```
+
+or by applying the `Netsells\EloquentFilters\Attributes\FiltersModel` attribute to the filter class. 
+The attribute takes two arguments, these are the model class and the query parameters that the filter is to be bound to.
 
 ```php
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Model Filter Registration
-|--------------------------------------------------------------------------
-| This config file is used to register eloquent filters against
-| a query parameter.
-|
-| Model::class => [
-|      'query_parameter' => Filter::class,
-| ],
-|
-*/
+namespace App\Features\Filters;
 
-use App\Features\Filters\TitleFilter;
-use App\Models\Post;
+use Illuminate\Database\Eloquent\Builder;
+use Netsells\EloquentFilters\Interfaces\FilterInterface;
+use Netsells\EloquentFilters\Attributes\FiltersModel;
 
-return [
-    Post::class => [
-        'title' => TitleFilter::class,
-    ],
-];
+class TitleFilter implements FilterInterface
+{
+    #[FiltersModel(Post::class, 'title')]
+    public function applyFilter(Builder $query, $value): void
+    {
+        $query->where('title', 'like', "%{$value}%");
+    }
+}
 ```
 
-*Note - the query parameter is independent of the database column being queried. They are coupled together only by the config file*
+You may specify the directory in which to look for filters by setting the `filter_directory` value in the `eloquent-filters.php` config file. By defualt the entire `app/` directory will be scanned.
+
+*Note - the query parameter is independent of the database column being queried.*
 
 Finally, apply the filter as follows.
 
