@@ -3,15 +3,18 @@
 namespace Netsells\EloquentFilters\Utilities;
 
 use Netsells\AttributeFinder\AttributeFinder;
-use ReflectionClass;
 use Netsells\EloquentFilters\Attributes\FiltersModel;
 use Netsells\EloquentFilters\Interfaces\FilterFinderInterface;
+use Netsells\AttributeFinder\Exceptions\InvalidDirectoryException;
 
 final class FilterFinder implements FilterFinderInterface
 {
     private array $mappedFilters;
     private AttributeFinder $finder;
 
+    /**
+     *@throws InvalidDirectoryException
+     */
     public function __construct()
     {
         $this->finder = new AttributeFinder(config('eloquent-filters.directory', base_path('app')));
