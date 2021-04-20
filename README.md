@@ -2,6 +2,8 @@
 
 Eloquent Filters provides you with the scaffolding to easily organise and add filters to your eloquent models. The primary purpose of this package is to help keep both models and controllers clean by helping you to extract search / filter logic into well defined, dedicated classes.
 
+It is created and maintained by the [Netsells team](https://netsells.co.uk/)
+
 ## Key Features
 * Setup is extremely easy. Publish a config file then apply a trait to your models and you're done.
 * Gives you an alternative to filling your models full scopes or controllers full of query logic.
