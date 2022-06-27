@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "netsells/attribute-finder": "^2.0"
+        "netsells/attribute-finder": "dev-task/AAD-8"
     },
     "require-dev": {
         "orchestra/testbench": "^6.4"
